@@ -1,71 +1,208 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>QuimIA</title>
-<style>
-body {
-  background: #0f172a;
-  color: white;
-  font-family: Arial;
-  margin: 0;
+export default function QuimIAProjectSite() {
+  const questions = [
+    {
+      pergunta: 'Balanceie a equação: H₂ + O₂ → H₂O',
+      resposta: '2H₂ + O₂ → 2H₂O',
+      acertou: 'Mostra corretamente a conservação dos átomos e o uso de coeficientes.',
+      limite: 'O aluno ainda precisa entender por que a fórmula das substâncias não pode ser alterada.'
+    },
+    {
+      pergunta: 'O que é uma reação química?',
+      resposta: 'É uma transformação em que substâncias iniciais se transformam em novas substâncias.',
+      acertou: 'Apresenta a ideia central de transformação da matéria.',
+      limite: 'Pode ficar superficial se não explicar evidências ou exemplos do cotidiano.'
+    },
+    {
+      pergunta: 'A ferrugem é uma reação química?',
+      resposta: 'Sim. A ferrugem é resultado da oxidação do ferro.',
+      acertou: 'Relaciona o conteúdo com um fenômeno do cotidiano.',
+      limite: 'Precisa de conferência para aprofundar as condições da reação.'
+    },
+    {
+      pergunta: 'Qual a diferença entre ligação iônica e covalente?',
+      resposta: 'Na iônica há transferência de elétrons; na covalente há compartilhamento.',
+      acertou: 'Resume corretamente a diferença principal entre os tipos de ligação.',
+      limite: 'Pode simplificar demais se não trouxer exemplos corretos.'
+    },
+    {
+      pergunta: 'Para que serve a tabela periódica?',
+      resposta: 'Ela organiza os elementos químicos de acordo com suas propriedades e estrutura atômica.',
+      acertou: 'Ajuda a entender grupos, períodos e tendências periódicas.',
+      limite: 'Ainda exige estudo para interpretar propriedades com segurança.'
+    }
+  ];
+
+  const cards = [
+    {
+      title: 'Balanceamento de equações',
+      text: 'A IA pode mostrar o passo a passo do balanceamento e reforçar a Lei da Conservação da Massa.'
+    },
+    {
+      title: 'Reações no cotidiano',
+      text: 'A IA ajuda a relacionar ferrugem, combustão, fermentação e digestão com conceitos químicos.'
+    },
+    {
+      title: 'Tabela periódica',
+      text: 'A IA pode organizar grupos, períodos, propriedades e diferenças entre metais, ametais e gases nobres.'
+    }
+  ];
+
+  const checklist = [
+    'Já tentei resolver sozinho antes de usar a IA?',
+    'A resposta faz sentido para mim ou eu só li sem entender?',
+    'Consigo explicar com minhas próprias palavras?',
+    'Confirmei a resposta no caderno, livro ou com o professor?',
+    'Consigo resolver um exercício parecido sem ajuda?'
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <header className="border-b border-slate-800 bg-gradient-to-b from-cyan-950/40 to-slate-950">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="inline-block rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-sm text-cyan-300">
+            Projeto Interdisciplinar • Química
+          </div>
+          <h1 className="mt-5 text-4xl font-bold tracking-tight md:text-6xl">
+            QuimIA
+          </h1>
+          <p className="mt-4 max-w-3xl text-lg text-slate-300 md:text-xl">
+            IA nos Estudos de Química: como usar de forma consciente, crítica e eficiente.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
+              <p className="text-sm text-slate-400">Grupo</p>
+              <p className="mt-1 text-base font-medium">Adicionar nomes do grupo aqui</p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
+              <p className="text-sm text-slate-400">Turma</p>
+              <p className="mt-1 text-base font-medium">Adicionar turma</p>
+            </div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
+              <p className="text-sm text-slate-400">Disciplina</p>
+              <p className="mt-1 text-base font-medium">Química</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-6xl space-y-14 px-6 py-12">
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-xl">
+            <h2 className="text-2xl font-semibold">O que é IA?</h2>
+            <p className="mt-4 leading-7 text-slate-300">
+              A Inteligência Artificial é uma tecnologia capaz de analisar informações e gerar respostas, simulando parte do raciocínio humano. Nos estudos, ela pode ajudar a explicar conteúdos, resolver exercícios e organizar o aprendizado.
+            </p>
+          </div>
+          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-xl">
+            <h2 className="text-2xl font-semibold">Como ela pode ajudar?</h2>
+            <ul className="mt-4 space-y-3 text-slate-300">
+              <li>• Explicar conteúdos difíceis de forma mais simples</li>
+              <li>• Resolver exercícios passo a passo</li>
+              <li>• Gerar exemplos e resumos</li>
+              <li>• Organizar revisões e listas de treino</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
+          <h2 className="text-3xl font-semibold">Como a IA ajuda em Química</h2>
+          <p className="mt-3 max-w-3xl text-slate-300">
+            Na Química, a IA pode auxiliar na compreensão de equações, reações químicas e propriedades dos elementos. Porém, o uso correto exige conferência, interpretação e autonomia do aluno.
+          </p>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {cards.map((card) => (
+              <div key={card.title} className="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+                <h3 className="text-xl font-semibold text-cyan-300">{card.title}</h3>
+                <p className="mt-3 leading-7 text-slate-300">{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 shadow-xl">
+            <h2 className="text-2xl font-semibold text-emerald-300">Uso correto</h2>
+            <ul className="mt-4 space-y-3 text-slate-200">
+              <li>• Usar a IA para entender o conteúdo</li>
+              <li>• Pedir explicações com exemplos</li>
+              <li>• Conferir as respostas em fontes confiáveis</li>
+              <li>• Resolver exercícios parecidos sozinho depois</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-rose-500/20 bg-rose-500/5 p-8 shadow-xl">
+            <h2 className="text-2xl font-semibold text-rose-300">Uso incorreto</h2>
+            <ul className="mt-4 space-y-3 text-slate-200">
+              <li>• Copiar respostas sem compreender</li>
+              <li>• Confiar na IA sem verificar</li>
+              <li>• Substituir o estudo pelo atalho</li>
+              <li>• Ler a explicação sem conseguir refazer sozinho</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
+          <h2 className="text-3xl font-semibold">Teste prático com IA</h2>
+          <p className="mt-3 max-w-3xl text-slate-300">
+            O grupo analisou perguntas de Química para observar acertos, limitações e a necessidade de conferência das respostas.
+          </p>
+          <div className="mt-8 space-y-5">
+            {questions.map((item, index) => (
+              <div key={index} className="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+                <p className="text-sm font-medium uppercase tracking-wide text-cyan-300">Pergunta {index + 1}</p>
+                <h3 className="mt-2 text-xl font-semibold">{item.pergunta}</h3>
+                <p className="mt-4 text-slate-300"><span className="font-semibold text-slate-100">Resposta da IA:</span> {item.resposta}</p>
+                <p className="mt-3 text-slate-300"><span className="font-semibold text-emerald-300">Onde acertou:</span> {item.acertou}</p>
+                <p className="mt-3 text-slate-300"><span className="font-semibold text-amber-300">Limitação:</span> {item.limite}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
+            <h2 className="text-2xl font-semibold">Limitações da IA</h2>
+            <ul className="mt-4 space-y-3 text-slate-300">
+              <li>• Pode errar mesmo parecendo convincente</li>
+              <li>• Pode simplificar demais conteúdos importantes</li>
+              <li>• Não conhece exatamente a prova nem o professor</li>
+              <li>• Não substitui o raciocínio do aluno</li>
+            </ul>
+          </div>
+          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
+            <h2 className="text-2xl font-semibold">Como verificar a resposta</h2>
+            <ul className="mt-4 space-y-3 text-slate-300">
+              <li>• Comparar com o livro, caderno e material da escola</li>
+              <li>• Testar a explicação em exercícios parecidos</li>
+              <li>• Perguntar ao professor em caso de dúvida</li>
+              <li>• Ver se consegue explicar com as próprias palavras</li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
+          <h2 className="text-3xl font-semibold">Guia rápido de uso consciente</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-5">
+            {checklist.map((item) => (
+              <div key={item} className="rounded-2xl border border-slate-800 bg-slate-950 p-5 text-slate-300">
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8 shadow-xl">
+          <h2 className="text-3xl font-semibold">Conclusão</h2>
+          <p className="mt-4 max-w-4xl leading-8 text-slate-200">
+            A IA pode ser uma ferramenta valiosa para o estudo de Química quando é usada para explicar, organizar e revisar conteúdos. No entanto, ela não substitui a aprendizagem real. O aluno precisa interpretar, conferir e praticar sozinho. Portanto, o uso consciente da IA depende de autonomia, responsabilidade e pensamento crítico.
+          </p>
+        </section>
+      </main>
+
+      <footer className="border-t border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-6xl px-6 py-8 text-sm text-slate-400">
+          Projeto escolar sobre IA nos estudos • Química • QuimIA
+        </div>
+      </footer>
+    </div>
+  );
 }
-header {
-  padding: 40px;
-  background: #020617;
-  text-align: center;
-}
-section {
-  padding: 30px;
-  border-bottom: 1px solid #1e293b;
-}
-h1 { color: #22d3ee; }
-.card {
-  background: #020617;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 10px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<h1>QuimIA</h1>
-<p>IA nos Estudos de Química</p>
-</header>
-
-<section>
-<h2>O que é IA?</h2>
-<p>A Inteligência Artificial ajuda a explicar conteúdos e resolver exercícios, mas precisa ser usada com pensamento crítico.</p>
-</section>
-
-<section>
-<h2>Como ajuda na Química</h2>
-<div class="card">Balanceamento de equações</div>
-<div class="card">Reações químicas do cotidiano</div>
-<div class="card">Tabela periódica</div>
-</section>
-
-<section>
-<h2>Uso correto</h2>
-<p>Usar para entender, testar e revisar.</p>
-
-<h2>Uso incorreto</h2>
-<p>Copiar sem pensar e confiar sem verificar.</p>
-</section>
-
-<section>
-<h2>Teste com IA</h2>
-<p>Exemplo: H₂ + O₂ → H₂O</p>
-<p>Resposta: 2H₂ + O₂ → 2H₂O</p>
-</section>
-
-<section>
-<h2>Conclusão</h2>
-<p>A IA ajuda, mas quem aprende é o aluno.</p>
-</section>
-
-</body>
-</html>
