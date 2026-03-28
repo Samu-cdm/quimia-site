@@ -1,98 +1,635 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>QuimIA</title>
-<style>
-body {
-  background: #0f172a;
-  color: white;
-  font-family: Arial;
-  margin: 0;
-}
-header {
-  padding: 40px;
-  background: #020617;
-  text-align: center;
-}
-section {
-  padding: 30px;
-  border-bottom: 1px solid #1e293b;
-}
-h1 { color: #22d3ee; }
-.card {
-  background: #020617;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 10px;
-}
-</style>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuimIA | IA nos Estudos de Química</title>
+  <style>
+    :root {
+      --bg: #06101f;
+      --bg-soft: #0c1b33;
+      --card: rgba(10, 25, 49, 0.88);
+      --card-2: rgba(7, 18, 36, 0.95);
+      --text: #eef6ff;
+      --muted: #b8c7dc;
+      --line: rgba(122, 168, 255, 0.16);
+      --cyan: #35d6ff;
+      --cyan-2: #84f3ff;
+      --green: #4ade80;
+      --red: #fb7185;
+      --yellow: #facc15;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
 
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(53, 214, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, #030a16 0%, #071426 35%, #08162a 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 11, 23, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 0.4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan-2);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 72px 20px 50px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card, .panel, .card, .test-card, .check-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 38px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(53, 214, 255, 0.12);
+      color: var(--cyan-2);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid rgba(53, 214, 255, 0.18);
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: 3.4rem;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      color: var(--cyan);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .hero-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mini {
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .mini strong {
+      display: block;
+      color: var(--cyan-2);
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    .side-panel {
+      padding: 28px;
+    }
+
+    .side-panel h3 {
+      margin-top: 0;
+      font-size: 1.45rem;
+      color: var(--cyan-2);
+    }
+
+    .side-panel ul {
+      padding-left: 18px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 20px 28px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 2rem;
+      letter-spacing: -0.4px;
+    }
+
+    .section-sub {
+      margin: 0 0 28px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--cyan-2);
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .good {
+      border-color: rgba(74, 222, 128, 0.22);
+      background: linear-gradient(180deg, rgba(74, 222, 128, 0.08), rgba(10, 25, 49, 0.92));
+    }
+
+    .bad {
+      border-color: rgba(251, 113, 133, 0.22);
+      background: linear-gradient(180deg, rgba(251, 113, 133, 0.08), rgba(10, 25, 49, 0.92));
+    }
+
+    .good h3 { color: var(--green); }
+    .bad h3 { color: var(--red); }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .tests {
+      display: grid;
+      gap: 18px;
+    }
+
+    .test-card {
+      padding: 24px;
+    }
+
+    .test-card h3 {
+      margin: 0 0 10px;
+      color: var(--cyan-2);
+      font-size: 1.18rem;
+    }
+
+    .label {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(53, 214, 255, 0.12);
+      color: var(--cyan-2);
+      border: 1px solid rgba(53, 214, 255, 0.18);
+    }
+
+    .test-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 10px 0 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .check-card {
+      padding: 18px;
+      background: var(--card-2);
+    }
+
+    .check-card label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+      line-height: 1.55;
+      cursor: pointer;
+    }
+
+    .check-card input {
+      margin-top: 3px;
+      accent-color: var(--cyan);
+      transform: scale(1.15);
+    }
+
+    .progress-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(53, 214, 255, 0.07);
+      border: 1px solid rgba(53, 214, 255, 0.16);
+      color: var(--muted);
+    }
+
+    .progress-number {
+      font-size: 1.8rem;
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .conclusion {
+      padding: 32px;
+      background:
+        linear-gradient(135deg, rgba(53, 214, 255, 0.12), rgba(8, 22, 42, 0.95)),
+        var(--card);
+    }
+
+    .conclusion p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+      font-size: 1.04rem;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 20px 40px;
+      color: #93a7c1;
+      font-size: 0.92rem;
+    }
+
+    .top-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: rgba(53, 214, 255, 0.15);
+      color: var(--cyan-2);
+      border: 1px solid rgba(53, 214, 255, 0.25);
+      border-radius: 999px;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .cards-3,
+      .split,
+      .grid-2,
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
 <body>
 
-<header>
-<h1>QuimIA</h1>
-<p>IA nos Estudos de Química</p>
-</header>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">QuimIA</div>
+      <div class="nav-links">
+        <a href="#conceito">Conceito</a>
+        <a href="#quimica">Química</a>
+        <a href="#usos">Usos</a>
+        <a href="#teste">Teste prático</a>
+        <a href="#verificacao">Verificação</a>
+        <a href="#guia">Guia rápido</a>
+        <a href="#conclusao">Conclusão</a>
+      </div>
+    </div>
+  </nav>
 
-<section>
-<h2>O que é IA?</h2>
-<p>A Inteligência Artificial ajuda a explicar conteúdos e resolver exercícios, mas precisa ser usada com pensamento crítico.</p>
-</section>
+  <header class="hero">
+    <div class="hero-card">
+      <span class="badge">Projeto Interdisciplinar • Química</span>
+      <h1><span>QuimIA</span><br>IA nos Estudos de Química</h1>
+      <p>
+        Este projeto mostra como a Inteligência Artificial pode ajudar no estudo de Química de forma consciente, crítica e eficiente. A proposta não é substituir o raciocínio do aluno, mas usar a IA como apoio para explicar conteúdos, revisar conceitos e testar a própria compreensão.
+      </p>
 
-<section>
-<h2>Como ajuda na Química</h2>
-<div class="card">Balanceamento de equações</div>
-<div class="card">Reações químicas do cotidiano</div>
-<div class="card">Tabela periódica</div>
-</section>
+      <div class="hero-grid">
+        <div class="mini">
+          <strong>Grupo</strong>
+          Coloque os nomes aqui
+        </div>
+        <div class="mini">
+          <strong>Turma</strong>
+          Coloque a turma aqui
+        </div>
+        <div class="mini">
+          <strong>Escola</strong>
+          Coloque a escola aqui
+        </div>
+      </div>
+    </div>
 
-<section>
-<h2>Uso correto</h2>
-<p>Usar para entender, testar e revisar.</p>
+    <aside class="hero-card side-panel">
+      <h3>Ideia central</h3>
+      <ul>
+        <li>A IA pode facilitar o entendimento de conteúdos químicos.</li>
+        <li>Ela ajuda no balanceamento, nas reações do cotidiano e na organização do estudo.</li>
+        <li>Mas também pode errar, simplificar demais ou parecer certa sem estar completa.</li>
+        <li>Por isso, o aluno precisa conferir, interpretar e praticar sozinho.</li>
+      </ul>
+    </aside>
+  </header>
 
-<h2>Uso incorreto</h2>
-<p>Copiar sem pensar e confiar sem verificar.</p>
-</section>
+  <section class="section" id="conceito">
+    <h2 class="section-title">O que é IA?</h2>
+    <p class="section-sub">
+      A Inteligência Artificial é uma tecnologia capaz de analisar informações e gerar respostas com base em padrões. Nos estudos, ela pode explicar conteúdos, resolver exercícios passo a passo, criar exemplos e ajudar na revisão. Porém, ela não substitui o pensamento humano e nem garante respostas sempre corretas.
+    </p>
+  </section>
 
-<section>
-<h2>Teste com IA</h2>
-<p>Exemplo: H₂ + O₂ → H₂O</p>
-<p>Resposta: 2H₂ + O₂ → 2H₂O</p>
-</section>
+  <section class="section" id="quimica">
+    <h2 class="section-title">Como a IA ajuda em Química</h2>
+    <p class="section-sub">
+      Na Química, a IA pode ser usada para interpretar conceitos abstratos, organizar conteúdos complexos e relacionar teoria com fenômenos do cotidiano. O valor real da ferramenta aparece quando o aluno usa a resposta para aprender, e não apenas para copiar.
+    </p>
 
-<section>
-<h2>Conclusão</h2>
-<p>A IA ajuda, mas quem aprende é o aluno.</p>
-</section>
+    <div class="cards-3">
+      <div class="card">
+        <h3>Balanceamento de equações</h3>
+        <p>
+          A IA pode mostrar o passo a passo do balanceamento e reforçar a Lei da Conservação da Massa. Isso ajuda o aluno a perceber que os átomos precisam permanecer em mesma quantidade nos reagentes e nos produtos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Reações químicas no cotidiano</h3>
+        <p>
+          Ferrugem, combustão, fermentação, digestão e neutralização são exemplos que a IA pode conectar com a vida real. Assim, a Química deixa de parecer só teoria e passa a ser vista em situações concretas.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Tabela periódica</h3>
+        <p>
+          A IA pode organizar grupos, períodos, tendências periódicas e propriedades dos elementos, facilitando a compreensão de metais, ametais, gases nobres, eletronegatividade e reatividade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="usos">
+    <h2 class="section-title">Uso correto x uso incorreto da IA</h2>
+    <div class="split">
+      <div class="card good">
+        <h3>Uso correto</h3>
+        <p>
+          A IA deve ser usada para esclarecer dúvidas, pedir explicações com exemplos, revisar conteúdos e treinar exercícios. O aluno precisa conferir a resposta e depois tentar resolver uma questão parecida sozinho.
+        </p>
+      </div>
+
+      <div class="card bad">
+        <h3>Uso incorreto</h3>
+        <p>
+          O uso incorreto acontece quando o aluno copia respostas prontas, confia sem verificar, deixa de pensar e trata a IA como substituta do estudo. Nesse caso, pode até terminar a tarefa, mas não aprende de verdade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="teste">
+    <h2 class="section-title">Teste prático com IA</h2>
+    <p class="section-sub">
+      Para avaliar a utilidade da IA no estudo de Química, foram feitas perguntas que permitiram observar acertos, limitações e pontos que exigem conferência.
+    </p>
+
+    <div class="tests">
+      <div class="test-card">
+        <h3>1. Balanceie a equação: H₂ + O₂ → H₂O</h3>
+        <span class="label">Resposta da IA: 2H₂ + O₂ → 2H₂O</span>
+        <p><strong>Onde acertou:</strong> mostrou corretamente a conservação dos átomos e o uso dos coeficientes.</p>
+        <p><strong>Limitação:</strong> o aluno ainda precisa entender por que não pode alterar a fórmula das substâncias.</p>
+      </div>
+
+      <div class="test-card">
+        <h3>2. O que é uma reação química?</h3>
+        <span class="label">Resposta da IA: transformação em que substâncias iniciais originam novas substâncias</span>
+        <p><strong>Onde acertou:</strong> apresentou a ideia central de transformação da matéria.</p>
+        <p><strong>Limitação:</strong> pode ficar superficial se não trouxer exemplos ou evidências observáveis.</p>
+      </div>
+
+      <div class="test-card">
+        <h3>3. A ferrugem é uma reação química?</h3>
+        <span class="label">Resposta da IA: sim, é resultado da oxidação do ferro</span>
+        <p><strong>Onde acertou:</strong> relacionou Química com um fenômeno cotidiano.</p>
+        <p><strong>Limitação:</strong> ainda exige aprofundamento sobre as condições em que essa reação ocorre.</p>
+      </div>
+
+      <div class="test-card">
+        <h3>4. Qual a diferença entre ligação iônica e covalente?</h3>
+        <span class="label">Resposta da IA: na iônica há transferência; na covalente, compartilhamento de elétrons</span>
+        <p><strong>Onde acertou:</strong> resumiu corretamente a diferença principal.</p>
+        <p><strong>Limitação:</strong> pode simplificar demais se não trouxer exemplos corretos e contexto.</p>
+      </div>
+
+      <div class="test-card">
+        <h3>5. Para que serve a tabela periódica?</h3>
+        <span class="label">Resposta da IA: organizar os elementos químicos de acordo com suas propriedades</span>
+        <p><strong>Onde acertou:</strong> ajudou a entender grupos, períodos e tendências.</p>
+        <p><strong>Limitação:</strong> a compreensão real exige estudo das propriedades e comparação entre elementos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verificacao">
+    <h2 class="section-title">Limitações da IA e verificação das respostas</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3 style="margin-top:0;color:#facc15;">Limitações da IA</h3>
+        <ul>
+          <li>Pode errar mesmo quando a resposta parece convincente.</li>
+          <li>Pode simplificar demais conteúdos importantes.</li>
+          <li>Nem sempre aprofunda o conceito químico.</li>
+          <li>Não conhece exatamente a prova, o professor ou o material da turma.</li>
+          <li>Não substitui o raciocínio do aluno.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-top:0;color:#84f3ff;">Como verificar se a resposta está correta</h3>
+        <ul>
+          <li>Comparar com o livro, caderno e material escolar.</li>
+          <li>Testar a explicação em exercícios parecidos.</li>
+          <li>Perguntar ao professor em caso de dúvida.</li>
+          <li>Ver se a explicação faz sentido com o conteúdo estudado.</li>
+          <li>Confirmar se você consegue explicar com suas próprias palavras.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guia">
+    <h2 class="section-title">Guia rápido de uso consciente</h2>
+    <p class="section-sub">
+      Marque os itens abaixo e veja se você realmente usou a IA para aprender.
+    </p>
+
+    <div class="check-grid">
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Já tentei resolver sozinho antes de usar a IA?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> A resposta fez sentido para mim ou eu apenas li?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Consigo explicar isso com minhas próprias palavras?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Comparei a resposta com o livro, caderno ou professor?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Consigo resolver um exercício parecido sem ajuda?</label>
+      </div>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-number" id="progressNumber">0/5</div>
+      <div id="progressText">Você ainda não marcou nenhum critério de aprendizagem.</div>
+    </div>
+  </section>
+
+  <section class="section" id="conclusao">
+    <div class="conclusion card">
+      <h2 class="section-title" style="margin-top:0;">Conclusão</h2>
+      <p>
+        A investigação mostrou que a Inteligência Artificial pode ser uma ferramenta valiosa no estudo de Química, principalmente para explicar conteúdos, organizar ideias e revisar conceitos. No entanto, ela não deve ser usada como substituta do estudo. O aprendizado real acontece quando o aluno interpreta, verifica, pratica e desenvolve autonomia. Portanto, a IA só contribui de forma positiva quando é usada com responsabilidade, pensamento crítico e honestidade acadêmica.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    Projeto QuimIA • IA nos Estudos de Química • Trabalho escolar
+  </footer>
+
+  <button class="top-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <script>
+    const checks = document.querySelectorAll('.check-item');
+    const progressNumber = document.getElementById('progressNumber');
+    const progressText = document.getElementById('progressText');
+
+    function updateProgress() {
+      let total = checks.length;
+      let done = 0;
+
+      checks.forEach(item => {
+        if (item.checked) done++;
+      });
+
+      progressNumber.textContent = `${done}/${total}`;
+
+      if (done === 0) {
+        progressText.textContent = 'Você ainda não marcou nenhum critério de aprendizagem.';
+      } else if (done < total) {
+        progressText.textContent = 'Você está no caminho, mas ainda precisa conferir se realmente aprendeu.';
+      } else {
+        progressText.textContent = 'Ótimo: todos os critérios foram marcados. Isso indica uso mais consciente da IA.';
+      }
+    }
+
+    checks.forEach(item => item.addEventListener('change', updateProgress));
+  </script>
 
 </body>
 </html>
-<section>
-<h2>Uso correto e incorreto da IA</h2>
-
-<p><b>Uso correto:</b> usar a IA para entender, pedir explicações e depois testar sozinho.</p>
-<p><b>Uso incorreto:</b> copiar respostas, confiar sem verificar e não pensar.</p>
-</section>
-
-<section>
-<h2>Teste com IA</h2>
-
-<p><b>Pergunta:</b> Balanceie H₂ + O₂ → H₂O</p>
-<p><b>Resposta:</b> 2H₂ + O₂ → 2H₂O</p>
-<p><b>Análise:</b> A IA acertou, pois manteve a conservação dos átomos.</p>
-
-<p><b>Pergunta:</b> O que é reação química?</p>
-<p><b>Problema:</b> A resposta pode ser superficial, mostrando que nem sempre a IA aprofunda o conteúdo.</p>
-</section>
-
-<section>
-<h2>Limitações da IA</h2>
-<p>A IA pode errar, simplificar demais e não conhece a prova do aluno.</p>
-</section>
-
-<section>
-<h2>Conclusão</h2>
-<p>A IA é uma ferramenta útil, mas não substitui o estudo. O aprendizado depende do aluno.</p>
-</section>
